@@ -1,69 +1,68 @@
-# CliniClean AI
+# CliniClean AI — Cascadia AI Hackathon 2026
 
-CliniClean AI is a hackathon prototype that turns clinical notes and trial files into review-ready regulatory tables and QC reports.
+CliniClean AI is a clinical reporting prototype built for Cascadia AI Hackathon 2026.
+
+It demonstrates how AI can turn clinical notes and trial files into review-ready regulatory tables and QC reports, using **Box** as the clinical content workspace and **Apify** to collect external clinical reporting references.
+
+---
 
 ## Product Story
 
-Clinical reporting is still highly manual. Clinical teams often work with handwritten notes, scanned forms, patient-level data, SAP requirements, table shells, QC criteria, and external references.
+Clinical reporting is still highly manual.
 
-CliniClean AI demonstrates how AI can help transform these fragmented clinical inputs into structured, traceable, review-ready outputs.
+Clinical teams often work with fragmented materials such as handwritten notes, scanned forms, patient-level trial data, SAP requirements, table shells, QC criteria, and external references.
 
-## Workflow
+CliniClean AI shows how these materials can be transformed into structured, traceable, review-ready outputs.
 
-1. Clinical notes and trial files are organized in Box.
-2. Apify collects an external clinical reporting reference.
-3. CliniClean AI structures the data and generates a clinical table.
-4. The system runs QC validation.
-5. The generated table and QC report are saved back to Box for human review.
+The workflow is designed for a human-in-the-loop review process, where AI assists with structuring, table generation, and QC validation, while clinical experts remain responsible for final review.
+
+---
+
+## Core Workflow
+
+1. **Capture clinical notes**  
+   Clinical observations may begin as handwritten notes, scanned forms, or semi-structured records.
+
+2. **Structure trial data**  
+   CliniClean AI converts clinical notes and patient-level data into structured trial data.
+
+3. **Centralize files in Box**  
+   Study files, SAP requirements, table shells, QC criteria, Apify references, generated reports, and human review packages are organized in Box.
+
+4. **Collect external reference with Apify**  
+   Apify collects external clinical reporting reference material and provides it as QC context.
+
+5. **Generate clinical table**  
+   The AI generates a regulatory-style adverse events summary table.
+
+6. **Run QC validation**  
+   The system checks treatment groups, counts, percentages, severity breakdown, drug-related events, SAP alignment, and external reference context.
+
+7. **Save back to Box**  
+   The generated clinical table and QC report are uploaded back to Box for human review.
+
+---
 
 ## Box Integration
 
 Box is used as the clinical content workspace.
 
-It stores:
+In this demo, Box stores:
 
 - Clinical notes
-- Patient-level trial data
+- Patient-level adverse event data
 - SAP requirements
-- Table shells
-- QC criteria
-- Apify external references
-- Generated clinical tables
-- QC reports
+- Table shell
+- QC checklist
+- Apify external reference file
+- Generated clinical table
+- QC report
 - Human review package
 
-The demo includes a live Box upload workflow using `BOX_ACCESS_TOKEN` and `BOX_FOLDER_ID`.
+The demo includes a live Box upload workflow. When the user clicks **Save Report to Box**, the app uploads the generated files to a Box folder using the Box Upload API.
 
-## Apify Integration
+Generated files:
 
-Apify is used to collect external clinical reporting references as QC context.
-
-The demo includes an Apify reference collection workflow using `APIFY_TOKEN`.
-
-## Demo Output
-
-The demo generates:
-
-- `Adverse_Events_Summary_Table.md`
-- `QC_Report_Adverse_Events.md`
-
-These files are saved back to Box for human review.
-
-## Tech Stack
-
-- Lovable
-- TanStack Start
-- Cloudflare Workers
-- Box API
-- Apify API
-- React
-- TypeScript
-
-## Environment Variables
-
-This project uses server-side environment variables.
-
-```env
-APIFY_TOKEN=your_apify_token_here
-BOX_ACCESS_TOKEN=your_box_developer_token_here
-BOX_FOLDER_ID=your_box_folder_id_here
+```text
+Adverse_Events_Summary_Table.md
+QC_Report_Adverse_Events.md
